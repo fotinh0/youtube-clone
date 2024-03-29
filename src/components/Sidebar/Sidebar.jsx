@@ -16,15 +16,15 @@ import megan from "../../assets/megan.png";
 import cameron from "../../assets/cameron.png";
 
 const sideItemCategories = [
-  { label: "Home", src: home },
-  { label: "Gaming", src: game_icon },
-  { label: "Automobiles", src: automobiles },
-  { label: "Sports", src: sports },
-  { label: "Entertainment", src: entertainment },
-  { label: "Technology", src: tech },
-  { label: "Music", src: music },
-  { label: "Blogs", src: blogs },
-  { label: "News", src: news },
+  { label: "Home", src: home, id: 0 },
+  { label: "Gaming", src: game_icon, id: 20 },
+  { label: "Automobiles", src: automobiles, id: 2 },
+  { label: "Sports", src: sports, id: 17 },
+  { label: "Entertainment", src: entertainment, id: 24 },
+  { label: "Technology", src: tech, id: 28 },
+  { label: "Music", src: music, id: 10 },
+  { label: "Blogs", src: blogs, id: 22 },
+  { label: "News", src: news, id: 25 },
 ];
 const subscribeList = [
   { name: "PewDiePie", src: jack },
@@ -34,16 +34,22 @@ const subscribeList = [
   { name: "Nas Daily", src: cameron },
 ];
 
-function Sidebar({ sidebar }) {
+function Sidebar({ sidebar, category, setCategory }) {
   return (
     <div className={`sidebar ${sidebar ? "" : "small-sidebar"}`}>
       <div className="shortcut-links">
         <div className="side-links">
-          {sideItemCategories.map((category, index) => {
+          {sideItemCategories.map((item, index) => {
             return (
-              <div key={index} className="side-link">
-                <img src={category.src} />
-                <p>{category.label}</p>
+              <div
+                key={index}
+                className={`side-link ${category === item.id ? "active" : ""}`}
+                onClick={() => {
+                  setCategory(item.id);
+                }}
+              >
+                <img src={item.src} />
+                <p>{item.label}</p>
               </div>
             );
           })}
