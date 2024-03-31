@@ -28,7 +28,7 @@ const Feed = ({ category }) => {
             to={`video/${videoData.snippet.categoryId}/${videoData.id}`}
             className="card"
           >
-            <img src={videoData.snippet.thumbnails.medium.url} alt="" />
+            <img src={videoData.snippet.thumbnails.medium.url} alt="video thumbnail" />
             <h2>{videoData.snippet.title}</h2>
             <h3>{videoData.snippet.channelTitle}</h3>
             <p>

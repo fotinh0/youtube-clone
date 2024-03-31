@@ -66,18 +66,18 @@ function PlayVideo() {
 
         <div>
           <span>
-            <img src={like} alt="" />
+            <img src={like} alt="like icon" />
             {videoData ? value_converter(videoData.statistics.likeCount) : 125}
           </span>
           <span>
-            <img src={dislike} alt="" />2
+            <img src={dislike} alt="dislike icon" />2
           </span>
           <span>
-            <img src={share} alt="" />
+            <img src={share} alt="share icon" />
             Share
           </span>
           <span>
-            <img src={save} alt="" />
+            <img src={save} alt="save icon" />
             Save
           </span>
         </div>
