@@ -122,7 +122,7 @@ function PlayVideo() {
             <div key={index} className="comment">
               <img
                 src={item.snippet.topLevelComment.snippet.authorProfileImageUrl}
-                alt=""
+                alt="author profile image"
               />
               <div>
                 <h3>
@@ -135,9 +135,9 @@ function PlayVideo() {
                 </h3>
                 <p>{item.snippet.topLevelComment.snippet.textDisplay}</p>
                 <div className="comment-action">
-                  <img src={like} alt="" />
+                  <img src={like} alt="like icon" />
                   <span>{item.snippet.topLevelComment.snippet.likeCount}</span>
-                  <img src={dislike} alt="" />
+                  <img src={dislike} alt="dislike icon" />
                 </div>
               </div>
             </div>
