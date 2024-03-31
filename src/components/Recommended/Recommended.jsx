@@ -1,81 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Recommended.scss";
-import thumbnail1 from "../../assets/thumbnail1.png";
-import thumbnail2 from "../../assets/thumbnail2.png";
-import thumbnail3 from "../../assets/thumbnail3.png";
-import thumbnail4 from "../../assets/thumbnail4.png";
-import thumbnail5 from "../../assets/thumbnail5.png";
-import thumbnail6 from "../../assets/thumbnail6.png";
-import thumbnail7 from "../../assets/thumbnail7.png";
-import thumbnail8 from "../../assets/thumbnail8.png";
+import { value_converter } from "../../data";
+import { Link, useParams } from "react-router-dom";
 
 function Recommended() {
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const { categoryId } = useParams();
+  const [recommendedData, setRecommendedData] = useState(null);
+
+  async function fetchRecommendedData() {
+    const recommendedDataUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=46&regionCode=US&videoCategoryId=${categoryId}&key=${apiKey}`;
+    await fetch(recommendedDataUrl)
+      .then((res) => res.json())
+      .then((data) => setRecommendedData(data.items));
+  }
+
+  useEffect(() => {
+    fetchRecommendedData();
+  }, [categoryId]);
+
   return (
     <div className="recommended">
-      <div className="side-video-list">
-        <img src={thumbnail1} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail2} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail3} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail4} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail5} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail6} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail7} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src={thumbnail8} alt="" />
-        <div className="vid-info">
-          <h4>Best Cars in the World</h4>
-          <p>Fotinh0</p>
-          <p>213K Views</p>
-        </div>
-      </div>
+      {recommendedData &&
+        recommendedData.map((video, index) => {
+          return (
+            <div key={index} className="side-video-list">
+              <Link
+                to={`/video/${video.snippet.categoryId}/${video.id}`}
+                onClick={() => window.scrollTo(0, 0)}
+                className="small-thumbnail"
+              >
+                <img src={video.snippet.thumbnails.medium.url} alt="" />
+              </Link>
+              <div className="vid-info">
+                <h4>{video.snippet.title}</h4>
+                <p>{video.snippet.channelTitle}</p>
+                <p className="recommended-views">
+                  {value_converter(video.statistics.viewCount)} Views
+                </p>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 }

@@ -1,129 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Feed.scss";
-import thumbnail1 from "../../assets/thumbnail1.png";
-import thumbnail2 from "../../assets/thumbnail2.png";
-import thumbnail3 from "../../assets/thumbnail3.png";
-import thumbnail4 from "../../assets/thumbnail4.png";
-import thumbnail5 from "../../assets/thumbnail5.png";
-import thumbnail6 from "../../assets/thumbnail6.png";
-import thumbnail7 from "../../assets/thumbnail7.png";
-import thumbnail8 from "../../assets/thumbnail8.png";
 import { Link } from "react-router-dom";
+import { value_converter } from "../../data";
+import moment from "moment";
 
-const feedData = [
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail1,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail2,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail3,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail4,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail5,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail6,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail7,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail8,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail1,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail2,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail3,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail4,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail5,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail6,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail7,
-  },
-  {
-    title: "Best Channel to learn from",
-    channel: "GreatStack",
-    stats: "15K views • 2 days ago",
-    src: thumbnail8,
-  },
-];
+const Feed = ({ category }) => {
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const [data, setData] = useState([]);
 
-function Feed() {
+  async function fetchData() {
+    const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category}&key=${apiKey}`;
+    await fetch(videoList_url)
+      .then((response) => response.json())
+      .then((data) => setData(data.items));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [category]);
+
   return (
     <div className="feed">
-      {feedData.map((feed, index) => {
+      {data.map((videoData, index) => {
         return (
-          <Link to={`video/20/4521`} key={index} className="card">
-            <img src={feed.src} alt="" />
-            <h2>{feed.title}</h2>
-            <h3>{feed.channel}</h3>
-            <p>{feed.stats}</p>
+          <Link
+            key={index}
+            to={`video/${videoData.snippet.categoryId}/${videoData.id}`}
+            className="card"
+          >
+            <img src={videoData.snippet.thumbnails.medium.url} alt="" />
+            <h2>{videoData.snippet.title}</h2>
+            <h3>{videoData.snippet.channelTitle}</h3>
+            <p>
+              {value_converter(videoData.statistics.viewCount)} Views &bull;
+              {" " + moment(videoData.snippet.publishedAt).fromNow()}
+            </p>
           </Link>
         );
       })}
     </div>
   );
-}
+};
 
 export default Feed;

@@ -5,8 +5,7 @@
         justify-content: space-between;
         margin-bottom: 8px;
         img {
-            flex-basis: 49%;
-            width: 50%;
+            width: 100%;
         }
         .small-thumbnail, .vid-info {
             flex-basis: 49%;
@@ -26,4 +25,11 @@
         font-size: 12px;
         font-weight: 400;
     }
+}
+
+@media (max-width: 900px){
+    .recommended{
+        flex-basis: 100%;
+    }
+   
 }
