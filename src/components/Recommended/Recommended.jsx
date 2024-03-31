@@ -30,7 +30,10 @@ function Recommended() {
                 onClick={() => window.scrollTo(0, 0)}
                 className="small-thumbnail"
               >
-                <img src={video.snippet.thumbnails.medium.url} alt="" />
+                <img
+                  src={video.snippet.thumbnails.medium.url}
+                  alt="video thumbnail"
+                />
               </Link>
               <div className="vid-info">
                 <h4>{video.snippet.title}</h4>

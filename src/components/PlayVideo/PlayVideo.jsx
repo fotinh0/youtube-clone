@@ -90,7 +90,7 @@ function PlayVideo() {
               ? value_converter(channelData.snippet.thumbnails.default.url)
               : ""
           }
-          alt=""
+          alt="publisher-thumbnail"
         />
         <div>
           <p>{videoData ? videoData.snippet.channelTitle : ""}</p>
