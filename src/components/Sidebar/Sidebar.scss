@@ -11,17 +11,23 @@
             width: 20px;
             margin-right: 20px;
         }
+        .side-link-wrapper {
+            margin-bottom: 20px;
+        }
         .side-link {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
             width: fit-content;
             flex-wrap: wrap;
             cursor: pointer;
         }
-        .side-link.active img{
-            padding-bottom: 2px;
-            border-bottom: 3px solid red;
+        .active-bar {
+            width: 20px;
+            height: 3px;
+            margin-top: 3px;
+        }
+        .side-link-wrapper.active .active-bar{
+            background: red;
         }
         .subscribe-list {
             h3 {

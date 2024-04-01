@@ -9,7 +9,7 @@ const Feed = ({ category, feedData, setFeedData }) => {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
   async function fetchData() {
-    const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category}&key=${apiKey}`;
+    const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=48&regionCode=US&videoCategoryId=${category}&key=${apiKey}`;
     await fetch(videoList_url)
       .then((response) => response.json())
       .then((data) => setFeedData(data.items));

@@ -44,13 +44,22 @@ function Sidebar({ sidebar, category, setCategory }) {
             return (
               <div
                 key={index}
-                className={`side-link ${category === item.id ? "active" : ""}`}
-                onClick={() => {
-                  setCategory(item.id);
-                }}
+                className={`side-link-wrapper ${
+                  category === item.id ? "active" : ""
+                }`}
               >
-                <img src={item.src} />
-                <p>{item.label}</p>
+                <div
+                  className={`side-link ${
+                    category === item.id ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setCategory(item.id);
+                  }}
+                >
+                  <img src={item.src} />
+                  <p>{item.label}</p>
+                </div>
+                <div className="active-bar" />
               </div>
             );
           })}
@@ -60,9 +69,11 @@ function Sidebar({ sidebar, category, setCategory }) {
           <h3>Subscribed</h3>
           {subscribeList.map((creator, index) => {
             return (
-              <div key={index} className="side-link">
-                <img src={creator.src} alt={creator.name} />
-                <p>{creator.name}</p>
+              <div key={index} className="side-link-wrapper">
+                <div key={index} className="side-link">
+                  <img src={creator.src} alt={creator.name} />
+                  <p>{creator.name}</p>
+                </div>
               </div>
             );
           })}

@@ -15,7 +15,7 @@ function Navbar({ setSidebar, setFeedData, setCategory }) {
   const [searchQuery, setSearchQuery] = useState(null);
 
   async function handleSearch() {
-    const searchUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&q=${searchQuery}&regionCode=US&key=${apiKey}`;
+    const searchUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=48&type=video&q=${searchQuery}&regionCode=US&key=${apiKey}`;
     if (searchQuery) {
       setCategory(null);
       const searchResponse = await fetch(searchUrl);
