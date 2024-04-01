@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Home.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Feed from "../../components/Feed/Feed";
+import PropTypes from "prop-types";
 
-function Home({ sidebar }) {
-  const [category, setCategory] = useState(0);
-
+function Home({ sidebar, feedData, setFeedData, category, setCategory }) {
   return (
     <>
       <Sidebar
@@ -14,10 +13,23 @@ function Home({ sidebar }) {
         setCategory={setCategory}
       />
       <div className={`container ${sidebar ? "" : "large-container"}`}>
-        <Feed category={category} />
+        <Feed
+          category={category}
+          feedData={feedData}
+          setFeedData={setFeedData}
+        />
       </div>
     </>
   );
 }
+
+Home.propTypes = {
+  sidebar: PropTypes.bool,
+  feedData: PropTypes.array,
+  category: PropTypes.number,
+  setFeedData: PropTypes.func,
+  setSidebar: PropTypes.func,
+  setCategory: PropTypes.func,
+};
 
 export default Home;

@@ -14,6 +14,7 @@ import simon from "../../assets/simon.png";
 import tom from "../../assets/tom.png";
 import megan from "../../assets/megan.png";
 import cameron from "../../assets/cameron.png";
+import PropTypes from "prop-types";
 
 const sideItemCategories = [
   { label: "Home", src: home, id: 0 },
@@ -70,5 +71,11 @@ function Sidebar({ sidebar, category, setCategory }) {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  sidebar: PropTypes.bool,
+  category: PropTypes.number,
+  setCategory: PropTypes.func,
+};
 
 export default Sidebar;
