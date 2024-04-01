@@ -9,6 +9,7 @@ const Feed = ({ category, feedData, setFeedData }) => {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
   async function fetchData() {
+    // Fetch video data
     const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=48&regionCode=US&videoCategoryId=${category}&key=${apiKey}`;
     await fetch(videoList_url)
       .then((response) => response.json())
@@ -16,6 +17,7 @@ const Feed = ({ category, feedData, setFeedData }) => {
   }
 
   useEffect(() => {
+    // Fetch video data when category updates
     fetchData();
   }, [category]);
 

@@ -9,6 +9,7 @@ function Recommended() {
   const [recommendedData, setRecommendedData] = useState(null);
 
   async function fetchRecommendedData() {
+    // Fetch recommended videos
     const recommendedDataUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=46&regionCode=US&videoCategoryId=${categoryId}&key=${apiKey}`;
     await fetch(recommendedDataUrl)
       .then((res) => res.json())

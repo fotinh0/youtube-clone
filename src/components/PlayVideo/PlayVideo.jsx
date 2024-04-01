@@ -16,7 +16,7 @@ function PlayVideo() {
   const [commentData, setCommentData] = useState([]);
 
   async function fetchVideoDataById() {
-    // fetch video data
+    // Fetch video data
     const videoDataByIdUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2C%20contentDetails%2C%20statistics&id=${videoId}&regionCode=US&key=${apiKey}`;
     await fetch(videoDataByIdUrl).then((res) => {
       res.json().then((data) => {
@@ -26,14 +26,14 @@ function PlayVideo() {
   }
 
   async function fetchOtherData() {
-    // Fetching Channel Data
+    // Fetch Channel Data
     if (videoData) {
       const channelLogo_url = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${videoData.snippet.channelId}&key=${apiKey}`;
       await fetch(channelLogo_url)
         .then((res) => res.json())
         .then((data) => setChannelData(data.items[0]));
 
-      // Fetching Comment Data
+      // Fetch Comment Data
       const videoComment_url = `https://www.googleapis.com/youtube/v3/commentThreads?textFormat=plainText&part=snippet&maxResults=50&key=${apiKey}&videoId=${videoId}`;
       await fetch(videoComment_url)
         .then((res) => res.json())
@@ -86,9 +86,8 @@ function PlayVideo() {
       <div className="publisher">
         <img
           src={
-            channelData
-              ? value_converter(channelData.snippet.thumbnails.default.url)
-              : ""
+            channelData &&
+            value_converter(channelData.snippet.thumbnails.default.url)
           }
           alt="publisher-thumbnail"
         />
@@ -96,24 +95,19 @@ function PlayVideo() {
           <p>{videoData ? videoData.snippet.channelTitle : ""}</p>
 
           <span>
-            {channelData
-              ? value_converter(channelData.statistics.subscriberCount)
-              : "1M"}{" "}
+            {channelData &&
+              value_converter(channelData.statistics.subscriberCount)}{" "}
             Subscribers
           </span>
         </div>
         <button type="button">Subscribe</button>
       </div>
       <div className="video-description">
-        <p>
-          {videoData
-            ? videoData.snippet.description.slice(0, 250)
-            : "Description Here"}
-        </p>
+        <p>{videoData && videoData.snippet.description.slice(0, 250)}</p>
         <hr />
         {/* 130 Comments */}
         <h4>
-          {videoData ? value_converter(videoData.statistics.commentCount) : 130}{" "}
+          {videoData && value_converter(videoData.statistics.commentCount)}{" "}
           Comments
         </h4>
 
