@@ -9,10 +9,8 @@ import tech from "../../assets/tech.png";
 import music from "../../assets/music.png";
 import blogs from "../../assets/blogs.png";
 import news from "../../assets/news.png";
-import jack from "../../assets/jack.png";
 import simon from "../../assets/simon.png";
 import tom from "../../assets/tom.png";
-import megan from "../../assets/megan.png";
 import cameron from "../../assets/cameron.png";
 import PropTypes from "prop-types";
 
@@ -28,11 +26,9 @@ const sideItemCategories = [
   { label: "News", src: news, id: 25 },
 ];
 const subscribeList = [
-  { name: "PewDiePie", src: jack },
-  { name: "MrBeast", src: simon },
-  { name: "Justin Bieber", src: tom },
-  { name: "5-Munute Craft", src: megan },
-  { name: "Nas Daily", src: cameron },
+  { name: "Tifo Football", src: cameron },
+  { name: "Athletic Interest", src: tom },
+  { name: "Rabona TV", src: simon },
 ];
 
 function Sidebar({ sidebar, category, setCategory }) {
