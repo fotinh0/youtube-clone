@@ -1,7 +1,7 @@
 # YouTube Clone
 
 This is a clone of YouTube created using React and YouTube Data API. <br/>
-Live URL: [youtubeclonefc.netlify.app/](youtubeclonefc.netlify.app/) 
+Live URL: [https://youtubeclonefc.netlify.app](https://youtubeclonefc.netlify.app) 
 
 
 ## Screenshot 
